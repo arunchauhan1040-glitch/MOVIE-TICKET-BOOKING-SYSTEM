@@ -1,0 +1,19 @@
+name: C++ Build Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build
+        run: g++ -std=c++17 -Wall -Wextra -pedantic main.cpp -o movie_booking
+      - name: Smoke test
+        run: |
+          printf '1\n8\n' | ./movie_booking
