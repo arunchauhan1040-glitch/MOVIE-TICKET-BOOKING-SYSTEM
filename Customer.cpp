@@ -6,7 +6,11 @@ class Customer {
     string name;
     string phone;
 public:
-    Customer(int id, string name, string phone) : id(id), name(name), phone(phone) {}
+    Customer(int id, string name, string phone) {
+        this->id = id;
+        this->name = name;
+        this->phone = phone;
+    }
     int getId() const { return id; }
     string getName() const { return name; }
     string getPhone() const { return phone; }
