@@ -13,7 +13,6 @@ public:
         for (int number : seatNumbers) {
             for (ShowSeat* existing : selected)
                 if (existing->getNumber() == number) return nullptr;
-
             ShowSeat* seat = show->findSeat(number);
             if (!seat || !seat->isAvailable()) return nullptr;
             selected.push_back(seat);
@@ -28,7 +27,7 @@ public:
             return nullptr;
         }
 
-        Booking* booking = new Booking(customer, show, selected, total);
+        Booking* booking = new Booking(customer, show, selected, total, payment.method());
         printer.print(*booking, payment.method());
         return booking;
     }
@@ -40,7 +39,7 @@ public:
         return true;
     }
 
-    void printTicket(const Booking* booking, const string& paymentMethod) const {
-        if (booking) printer.print(*booking, paymentMethod);
+    void printTicket(const Booking* booking) const {
+        if (booking) printer.print(*booking, booking->getPaymentMethod());
     }
 };
